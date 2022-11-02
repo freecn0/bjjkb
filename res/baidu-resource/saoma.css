@@ -1,0 +1,242 @@
+/* 页脚 */
+.saomaPagefooter{
+display:flex;
+justify-content:center;
+align-items:center;
+padding-top:3.2vw;
+padding-bottom:5.333333333333333vw;
+height:8.533333333333333vw;
+position:absolute;
+bottom:0;
+line-height:8.533333333333333vw;
+color:rgba(0,0,0,.3);
+font-size:3.7333333333333334vw;
+text-align:center;
+width:100%
+}
+
+@font-face{font-family:"akrobat-bold";src:url("../../res/Akrobat-Bold.otf") format('opentype')}
+@font-face{font-family:"akrobat";src:url("../../res/Akrobat-SemiBold.otf") format('opentype')}
+
+/* 跑马灯 */
+.horse1{
+background: url("../../images/jkb-health-code-deng-green-gif.gif") left top no-repeat;
+background-size:100% 100%}
+
+.saomaPagewrap{
+width:100vw;
+min-height:100vh;
+box-sizing:border-box;
+padding-bottom:17.333333333333332vw;
+background:url("../../images/jkb-health-code-background-green-1.png")no-repeat;
+background-size:cover;
+position:relative
+}
+
+.content{
+width:91.46666666666667vw;
+height:150.4vw;
+background:url("../../images/jkb-health-code-background.png");
+background-size:100% 100%;
+margin:4.266666666666667vw
+}
+.content .header{
+padding:3.2vw 4.266666666666667vw 0 5.333333333333333vw;
+box-sizing:border-box;
+display:flex;
+justify-content:space-between;
+align-items:center
+}
+.content .header .left{
+display:flex;
+align-items:center;
+flex-direction:column;
+justify-content:center;
+flex:1
+}
+.content .header .img{
+width:8.533333333333333vw;
+height:8.533333333333333vw
+}
+.content .header .left .text{
+color:#333;
+font-size:4.8vw;
+margin:0 3.2vw
+}
+.content .header .left .id{
+color:#333;
+font-size:4.266666666666667vw;
+font-family:"akrobat"
+}
+.content .header .right{
+width:8.533333333333333vw;
+height:8.533333333333333vw
+}
+.content .photo{
+width:53.333333333333336vw;
+height:53.333333333333336vw;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:10.666666666666666vw auto 5.333333333333333vw auto;
+position:relative
+}
+.content .photo .img{
+width:46.93333333333333vw;
+height:46.93333333333333vw
+}
+.status-box{
+display:flex;
+justify-content:center
+}
+.content .status{
+display:flex;
+align-items:center;
+padding:0 3.2vw;
+box-sizing:border-box;
+background:linear-gradient(135deg,rgba(0,163,131,1) 0%,rgba(63,224,149,1) 52%,rgba(0,204,136,1) 100%);
+height:10.666666666666666vw;
+justify-content:center;
+border-radius:1.0666666666666667vw
+}
+.content .status .qrcode-img{
+width:6.4vw;
+height:6.4vw;
+background:url("../../images/jkb-health-code-panel-green-qrcode.png") no-repeat;
+background-size:100% 100%
+}
+.content .status .tip-img{
+width:4.266666666666667vw;
+height:4.266666666666667vw
+}
+.content .status .text{
+color:#fff;
+font-size:5.333333333333333vw;
+margin:0 1.0666666666666667vw;
+font-weight:700
+}
+@keyframes twinkling{
+0%{opacity:1}
+62%{opacity:1}
+63%{opacity:0}
+100%{opacity:0}
+}
+.content .status .text.twinkling{
+animation:twinkling 1.3s infinite linear
+}
+.content .time{
+color:#333;
+font-size:5.333333333333333vw;
+margin-top:4.8vw;
+display:flex;
+justify-content:center;
+font-family:"akrobat"
+}
+.content .box{
+padding:0 4.266666666666667vw;
+box-sizing:border-box;
+justify-content:space-between;
+display:flex;
+margin-top:12.8vw
+}
+.content .box .nucleic{
+width:40.266666666666666vw;
+height:23.466666666666665vw;
+background:url("../../images/jingtong-jkb-yin-bg.png") no-repeat;
+background-size:100% 100%;
+padding:3.2vw 0 2.1333333333333333vw 3.2vw;
+box-sizing:border-box
+}
+.content .box .nucleic .top{
+display:flex;
+align-items:center;
+height:7.466666666666667vw;
+line-height:7.466666666666667vw
+}
+.content .box .nucleic .top .text{
+font-weight:700;
+font-size:4.8vw;
+color:#496ccc;
+position:relative
+}
+.content .box .nucleic .top .text .num{
+font-size:17.066666666666666vw;
+display:inline-block;
+height:14.4vw;
+font-family:"akrobat-bold"
+}
+.content .box .nucleic .top .img{
+width:4.266666666666667vw;
+height:4.266666666666667vw;
+margin-left:1.0666666666666667vw
+}
+.content .box .nucleic .bottom{
+display:flex;
+align-items:center;
+margin-top:3.2vw;
+height:7.466666666666667vw;
+line-height:7.466666666666667vw
+}
+.content .box .nucleic .bottom .text{
+font-size:4.266666666666667vw;
+color:rgba(0,0,0,.6)
+}
+.content .box .nucleic .bottom .img{
+width:4.266666666666667vw;
+height:4.266666666666667vw;
+margin-left:1.0666666666666667vw
+}
+.content .box .vaccines{
+width:40.266666666666666vw;
+height:23.466666666666665vw;
+background:url("../../images/jingtong-jkb-yimiao-bg.png");
+background-size:100% 100%;
+padding:3.2vw 0 2.1333333333333333vw 3.2vw;
+box-sizing:border-box
+}
+.content .box .vaccines .top{
+display:flex;
+align-items:center;
+height:7.466666666666667vw;
+line-height:7.466666666666667vw
+}
+.content .box .vaccines .top .text{
+font-weight:700;
+font-size:4.8vw;
+color:#496ccc
+}
+.content .box .vaccines .top .img{
+width:4.266666666666667vw;
+height:4.266666666666667vw;
+margin-left:1.0666666666666667vw
+}
+.content .box .vaccines .bottom{
+display:flex;
+align-items:center;
+margin-top:3.2vw;
+height:7.466666666666667vw;
+line-height:7.466666666666667vw
+}
+.content .box .vaccines .bottom .text{
+font-size:4.266666666666667vw;
+color:rgba(0,0,0,.6)
+}
+.content .box .vaccines .bottom .img{
+width:4.266666666666667vw;
+height:4.266666666666667vw;
+margin-left:1.0666666666666667vw
+}
+.back-home-btn{
+margin:0 4.266666666666667vw;
+height:12.8vw;
+background-color:#fff;
+border-radius:2.1333333333333333vw;
+box-shadow:0 2.1333333333333333vw 8.533333333333333vw 0 rgba(98,100,102,.15);
+font-size:4.266666666666667vw;
+line-height:12.8vw;
+font-weight:500;
+text-align:center
+}
+/* 二维码弹窗.qrcode-modal{position:fixed;top:0;bottom:0;left:0;right:0;display:flex;flex-direction:column;justify-content:center;align-items:center;background:rgba(0,0,0,.2);z-index:99}.qrcode-modal .content{display:flex;flex-direction:column;justify-content:center;align-items:center;width:66.66666666666667vw;height:66.66666666666667vw;background:#fff;border-radius:2.6666666666666665vw}.qrcode-modal .content .qrcode{margin-top:5.333333333333333vw}.qrcode-modal .qrcode-close{margin-top:5.333333333333333vw;color:#409eff}
+.complete{height:16vw;border-radius:1.3333333333333333vw;position:fixed;background-color:rgba(0,0,0,.7);display:inline-flex;justify-content:center;align-items:center;font-size:4vw;bottom:16vw;margin:0 auto;width:85%;left:0;right:0;color:#fff}.complete swan-button{width:16vw;height:8vw;font-size:4vw;line-height:8vw;background-color:#409eff;color:#fff;margin:0 0 0 4vw}.sign-30{position:absolute;right:-4vw;bottom:-4vw;width:17.866666666666667vw;height:17.866666666666667vw}.sign-30-icon{width:100%;height:100%}.top-name{margin-left:5.333333333333333vw;font-size:4.8vw;font-weight:700}
+ */

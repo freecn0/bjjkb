@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>北京健康宝</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <link rel="stylesheet" href="saoma.css">
+    <link rel="stylesheet" href="res/swiper-bundle.min.css">
+    <link rel="shortcut icon" href="images/bjjkb.png">
+    <link rel="apple-touch-icon" href="images/bjjkb.png">
+  </head>
+  <body style="margin: 0px;">
+<div class="saomaPagewrap">
+<div style="display: flex; align-items: center;">
+	<img src="../../images/wx-backbutton-blue.png" width="12vw" style="position:fixed;margin-left:5vw;margin-top:8vw;"></img>
+	<p style="position:fixed;font-size:4.4vw; color: white;margin-left:40vw;margin-top:20vw">北京健康宝</p>
+	<img src="../../images/wxButton-blue.png" width="100vw" style="position:fixed;margin-left:70vw;margin-top:7vw;opacity:70%;"></img>
+</div>
+<div style="height:12vw;"></div>
+<div class="content">
+<div class="header">
+<img class="img" src="../../images/jkb-health-code-logo.png"></img>
+<div class="left">
+<div class="text" id="personalNameAnonymous">习*</div>
+<div class="id personalId">11**************19</div>
+</div>
+<img class="right" src="../../images/jkb-health-code-qrcode.png"></img>
+</div>
+<div class="photo horse1">
+<img class="img personalImage" src="../../images/touxiang.jpg"/>
+<!--
+<div class="sign-30" s-if="{{signCommuting}}">
+<img class="sign-30-icon" mode="scaleToFill" src="https://b.bdstatic.com/searchbox/icms/searchbox/img/sign-30.png" />
+</div>
+-->
+</div>
+<div class="status-box">
+<div class="status">
+<div class="qrcode-img">
+</div>
+<div class="text twinkling">扫码未见异常</div>
+<img class="tip-img" src="../../images/jkb-health-code-panel-help.png"></img>
+</div>
+</div>
+<div class="time"><p id="dateValue" style="margin:0;">yyyy-mm-dd&nbsp</p><p id="timeValue" style="margin:0;"> hh:mm:ss</p></div>
+<div class="box">
+<div class="nucleic">
+<div class="top">
+<div class="text">阴性<div class="num">0</div>天</div>
+<img class="img" src="../../images/btn_refresh_grey@2x.png"></img>
+</div>
+<div class="bottom"><div class="text">核酸</div><img class="img" src="../../images/jingtong-jiankangbao-ico-help-grey.png"></img>
+</div>
+</div>
+<div class="vaccines">
+<div class="top">
+<div class="text">完成加强免疫</div>
+<img class="img" src="../../images/btn_refresh_grey@2x.png"></img>
+</div>
+<div class="bottom">
+<div class="text">疫苗</div>
+<img class="img" src="../../images/jingtong-jiankangbao-ico-help-grey.png"></img>
+</div>
+</div>
+</div>
+</div>
+<div class="back-home-btn">返回首页</div>
+<div class="saomaPagefooter">北京市大数据中心</div>
+</div>
+<!--
+<div class="qrcode-modal" s-if="isShowQrCode">
+<div class="content">
+<canvas class="qrcode" canvas-id="myCanvas" style="width: 150px; height: 150px;"></canvas>
+<div class="qrcode-close swan-spider-tap" on-bindtap="eventHappen('tap', $event, 'closeQrCode', '', 'bind')">关闭</div>
+</div>
+</div>
+-->
+</body>
+</html>

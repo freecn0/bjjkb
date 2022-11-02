@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>北京健康宝</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="res/swiper-bundle.min.css">
+    <link rel="shortcut icon" href="images/bjjkb.png">
+    <link rel="apple-touch-icon" href="images/bjjkb.png">
+  </head>
+  <body>
+<div id="infoInput" style="display: none;">
+    <p>Please enter your info:</p>
+    <label>Name:</label>
+    <input type="text" id="nameText"><br><br>
+    <label>ID:</label>
+    <input type="text" id="idText"><br><br>
+    <label>第一剂时间:</label>
+    <input type="date" id="dose1Dateinput"><br><br>
+    <label>第二剂时间:</label>
+    <input type="date" id="dose2Dateinput"><br><br>
+    <label>第三剂时间:</label>
+    <input type="date" id="dose3Dateinput"><br><br>
+    <label>第一剂厂商:</label>
+    <input type="text" id="dose1Prodinput" value="北京生物"><br><br>
+    <label>第二剂厂商:</label>
+    <input type="text" id="dose2Prodinput" value="北京生物"><br><br>
+    <label>第三剂厂商:</label>
+    <input type="text" id="dose3Prodinput" value="北京生物"><br><br>
+    <label>第一剂类型:</label>
+    <input type="text" id="dose1Typeinput" value="新冠疫苗（Vero细胞）"><br><br>
+    <label>第二剂类型:</label>
+    <input type="text" id="dose2Typeinput" value="新冠疫苗（Vero细胞）"><br><br>
+    <label>第三剂类型:</label>
+    <input type="text" id="dose3Typeinput" value="新冠疫苗（Vero细胞）"><br><br>
+    <label>Select image:</label>
+    <input type="file" multiple onchange="readURL(this);" ><br><br>
+    <button onclick="updateInfo();" >Update</button><br><br>
+    <button onclick="window.location.reload();">Refresh Page</button>
+    <img id="avatarImg" src=""></img>
+    <audio id="audio0" src="res/1.aac"></audio>
+</div>
+
+<div class="box" id="frontPage" style="z-index: 10;">
+    <div style="position: fixed; right: 0px; margin-top: 33px; margin-right: 21px; z-index: 1000; opacity: 0.7;">
+        <img src="images/wxButton.png" width=191px height=65px ></img>
+    </div>
+    <div class="back-view">
+        <div style="width:100%;height:3px;"></div>
+        <div class="view-title">北京健康宝</div>
+
+    </div>
+    <div class="back-view">
+        <img class="back-image" src="images/bg.webp"></img>
+        <img class="titleImg" src="images/title.webp" onclick="switchToNotice();"></img>
+        <img class="tanhao" src="images/tanhao.png" style="right:27px;"></img>
+
+        <div class="texts">
+            <img class="laba" src="images/laba.svg"></img>
+            <div class="swiper swp_container" onclick="switchToImg();">
+		<div class="swiper-wrapper">
+                    <div class="swiper-slide swp_item">
+                        <div class="message_title">
+			您的健康宝核酸天数计算规则变了，还有哪些变化一起来了解！
+			</div>
+                    </div>
+                    <div class="swiper-slide swp_item">
+                        <div class="message_title">
+			北京健康宝更新！升级优化了这些功能——
+			</div>
+                    </div>
+                    <div class="swiper-slide swp_item">
+                        <div class="message_title">
+			北京“健康宝”细化弹窗提示语
+			</div>
+                    </div>
+                    <div class="swiper-slide swp_item">
+                        <div class="message_title">
+			抵京后72小时内，这件事一定要尽早做！
+			</div>
+                    </div>
+                    <div class="swiper-slide swp_item">
+                        <div class="message_title">
+			Q:手机号不再使用时，如何顺利完成行程核验？
+			</div>
+                    </div>
+                    <div class="swiper-slide swp_item">
+                        <div class="message_title">
+			请尽快升级公共交通票卡
+			</div>
+                    </div>
+		</div>
+            </div>
+        </div>
+
+    </div>
+    <div class="grzx">
+        <img class="mine-profile-avatar" src="images/bjjkb.png"></img>
+        <div class="mine-profile-nickname" id="personalName">微信用户</div>
+        <img alt="" class="syjt" src="images/syjt.png"></img>
+    </div>
+    <div class="con" onclick="cameraOn();">
+        <div class="access-box">
+            <div class="img">
+                <img src="images/geren.png"></img>
+            </div>
+            <div class="right-content1">
+                <div class="title">本人信息扫码登记</div>
+            </div>
+            <div class="imgs">
+                <img class="syjt1" src="images/home_saomaicon.png"></img>
+            </div>
+        </div>
+    </div>
+    <div class="con" onclick="showInfo();">
+        <div class="access-box">
+            <div class="img">
+                <img src="images/ztcx.png"></img>
+            </div>
+            <div class="right-content1">
+                <div class="title">本人健康码自查询</div>
+            </div>
+        </div>
+    </div>
+    <div class="con">
+        <div class="access-box">
+            <div class="img">
+                <img src="images/laoyoujiankang.png"></img>
+            </div>
+            <div class="right-content1">
+                <div class="title">老幼健康码助查询</div>
+            </div>
+        </div>
+    </div>
+    <div class="con">
+        <div class="access-box" data-url="/pages/jxzq/zhuang-tai-cha-xun/index" hoverClass="access-box--hover">
+            <div class="img">
+                <img src="images/trjkzt.png"></img>
+            </div>
+            <div class="right-content1">
+                <div class="title">他人健康码代查询</div>
+            </div>
+        </div>
+    </div>
+    <div class="con" onclick="showhsym();">
+        <div class="access-box">
+            <div class="img">
+                <img src="images/hesuanicon.png"></img>
+            </div>
+            <div class="right-content1">
+                <div class="title" style="">核酸疫苗服务查询</div>
+            </div>
+        </div>
+    </div>
+    <div class="con" onclick="localStorage.clear();">
+        <div class="access-box" hoverClass="access-box--hover">
+            <div class="img">
+                <img src="images/daofangren.svg"></img>
+            </div>
+            <div class="right-content1">
+                <div class="title">到访人信息登记簿</div>
+            </div>
+        </div>
+    </div>
+    <div class="con">
+        <div class="access-box">
+            <div class="img">
+                <img src="images/jxxz_0820_icon.png"></img>
+            </div>
+            <div class="right-content1">
+                <div class="title" style="letter-spacing:56px">京心相助</div>
+            </div>
+        </div>
+    </div>
+    <div class="g-footer component-class">
+        <div class="g-footer__content">
+            <div class="g-footer__content__text footer">
+                <text bindtap="goMessage">北京市大数据中心</text>
+                <img class="input" src="images/input.svg"></img>
+            </div>
+        </div>
+    </div>
+<div id="snackbar"></div>
+<script src="res/swiper-bundle.min.js"></script>
+<script>
+const swiper = new Swiper('.swiper', {
+  // Optional parameters
+  direction: 'vertical',
+  loop: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: false,
+  },
+});
+</script>
+</div>
+
+<div class="saomaPagewrap" style="display: none;" id="saomaPage">
+<div style="display: flex; align-items: center;">
+	<img src="images/wx-backbutton-blue.png" width="12vw" style="position:fixed;margin-left:5vw;margin-top:8vw;" onclick="backToFront();"></img>
+	<p style="position:fixed;font-size:4.4vw; color: white;margin-left:40vw;margin-top:20vw">北京健康宝</p>
+	<img src="images/wxButton-blue.png" width="100vw" style="position:fixed;margin-left:70vw;margin-top:7vw;opacity:60%;z-index:9999;" onclick="backToFront();"></img>
+</div>
+<div style="height:12vw;"></div>
+<div class="content">
+<div class="header">
+<img class="img" src="images/jkb-health-code-logo.png"></img>
+<div class="left">
+<div class="text personalNameAnonymous">习*</div>
+<div class="id personalId">11**************19</div>
+</div>
+<img class="right" src="images/jkb-health-code-qrcode.png"></img>
+</div>
+<div class="photo horse1">
+<img class="img personalImage" src="images/touxiang.jpg"/>
+<!--
+<div class="sign-30" s-if="{{signCommuting}}">
+<img class="sign-30-icon" mode="scaleToFill" src="https://b.bdstatic.com/searchbox/icms/searchbox/img/sign-30.png" />
+</div>
+-->
+</div>
+<div class="saomaPage-status-box" onclick="playAudio();">
+<div class="status">
+<div class="qrcode-img">
+</div>
+<div class="text blink">扫码未见异常</div>
+<img class="tip-img" src="images/jkb-health-code-panel-help.png"></img>
+</div>
+</div>
+<div class="time"><p id="dateTimeString" style="margin:0;">yyyy-mm-dd hh:mm:ss</p></div>
+<div class="saomaPage-box">
+<div class="nucleic">
+<div class="top">
+<div class="text">阴性<div class="num">1</div>天</div>
+<img class="img" src="images/btn_refresh_grey@2x.png"></img>
+</div>
+<div class="bottom"><div class="text">核酸</div><img class="img" src="images/jingtong-jiankangbao-ico-help-grey.png"></img>
+</div>
+</div>
+<div class="vaccines">
+<div class="top">
+<div class="text">完成加强免疫</div>
+<img class="img" src="images/btn_refresh_grey@2x.png"></img>
+</div>
+<div class="bottom">
+<div class="text">疫苗</div>
+<img class="img" src="images/jingtong-jiankangbao-ico-help-grey.png"></img>
+</div>
+</div>
+</div>
+</div>
+<div class="back-home-btn" onclick="backToFront();">返回首页</div>
+<div class="saomaPagefooter">北京市大数据中心</div>
+</div>
+
+<div id="infoPage" style="display: none;">
+<header>
+    <nav id="navBar">
+	<button id="mpMenu" onclick="backToFront();">
+            <img src="images/wxButton-blue.png" width=191px height=65px></img>
+	</button>
+        <button id="mpNav" onclick="backToFront();">
+	    <img src="images/wx-backbutton-blue.png" height=35px></img>
+	</button>
+        <h1>健康宝</h1>
+    </nav>
+</header>
+<div class="mine">
+    <img class="ditu1" src="images/wodebj.png"></img>
+    <div class="wrap1">
+        <div class="infoCard">
+            <div class="tit-box">
+                <div class="xcx-img">
+                    <img class="img-flsm1" src="images/logo.png"></img>
+                </div>
+                <div class="tit1">
+		    <div class="timt" id="dateValue">yyyy年mm月dd日</div>
+		    <div class="timt1" id="timeValue">hh:mm:ss</div>
+                </div>
+                <div class="erweima">
+                    <img class="img-flsm12" src="images/erweima.png"></img>
+                </div>
+            </div>
+            <div class="touxiang">
+                <img class="img-git" src="images/horsegreen.gif"></img>
+                <div class="img-touxiang">
+                    <img class="img-tou personalImage" src="images/xjp.jpeg"></img>
+                </div>
+            </div>
+            <div class="status-box">
+                <img class="img-status12" src="images/lvicon.svg"></img>
+		<div id="cx-image" style="display: block;">
+                <img class="img-status1" src="images/weijianyichang.png"></img>
+		</div>
+                <div class="fslv">
+                    <img class="img-flsm" src="images/yuanzhu.png"></img>
+                </div>
+            </div>
+            <div class="hybox">
+                <div class="hsbox">
+                    <div style="width: 588px;margin: 0 25px;display: flex;justify-content: space-between;align-items: center;">
+                        <div class="jiance">
+                            <img class="hsjc" src="images/hsicon.svg"></img>
+                            <div class="hesuanwenzi">核酸</div>
+                            <img class="hesuanwenhao" src="images/whicon-s.svg"></img>
+                        </div>
+                        <div class="jieguo">阴性</div>
+                        <div class="jcsjbox" >
+                            <div class="jianceshijian">时间<div class="tianshu"> 1 </div>天</div>
+                            <div class="refresh-btn">
+                                <img class="shuaxin" src="images/sxicon.svg"></img>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ymbox">
+                    <div class="ymxian">
+                        <div class="jiance1">
+                            <img class="hsjc" src="images/ymicon.svg"></img>
+                            <div class="hesuanwenzi">疫苗</div>
+                            <img class="hesuanwenhao" src="images/whicon-s.svg"></img>
+                        </div>
+                        <div class="yimiaozhuangtai" id="vaxText">完成加强免疫<img class="xuanzhuan" src="images/sxicon.svg"></img>
+			</div>
+			<!--
+                        <div class="zhankai" id="vaxShowButton" onclick="vaxShow();">查看<img class="zhankaiimg" src="images/zkicon.svg"></img>
+                        </div>
+			-->
+                    </div>
+                </div>
+		<!--
+                <div class="shouqi" id="vaxHideButton" onclick="vaxHide();">收起<img class="shouqiimg" src="images/zkicon.svg"></img>
+		</div>
+		-->
+            </div>
+        </div>
+
+        <div class="box1">
+            <div class="box12">
+                <div class="cen">
+                    <div class="tit-lx">
+                        <div class="lx">姓名</div>
+                        <div class="mao">:</div>
+                    </div>
+                    <div class="mc personalNameAnonymous" >习*</div>
+                </div>
+                <div class="cen">
+                    <div class="tit-lx">
+                        <div class="lx">身份证号</div>
+                        <div class="mao">:</div>
+                    </div>
+                    <div class="mc personalId">11**************19</div>
+                </div>
+                <div class="cen">
+                    <div class="tit-lx">
+                        <div class="lx">查询时间</div>
+                        <div class="mao">:</div>
+                    </div>
+                    <div class="mc" id="todayValue">mm-dd hh:mm</div>
+                </div>
+                <div class="cen">
+                    <div class="tit-lx">
+                        <div class="lx">失效时间</div>
+                        <div class="mao">:</div>
+                    </div>
+                    <div class="mc1" id="edgeValue">mm-dd 24:00</div>
+                </div>
+            </div>
+        </div>
+        <div class="infofooter">
+            <button onclick="backToFront();">返回首页</button>
+        </div>
+        <div class="infofoot">北京市大数据中心</div>
+
+    </div>
+</div>
+<script data-main="res/main" src="res/require.js.2.3.6.js"></script>
+</div>
+
+<div id="cameraPage">
+<style>
+@keyframes mymove {
+  from {top: 15vh;}
+  to {top: 55vh;}
+  0% {opacity: 1;}
+  60% {opacity: 1;}
+  100% {opacity: 0;}
+}
+</style>
+<div style="position:fixed;animation: mymove 2.5s infinite;
+">
+<img src="images/scanning.png" width=100%>
+</img>
+</div>
+<video autoplay="true" id="videoElement">
+
+</video>
+</div>
+
+<div class="hsym_box" id="hsymPage">
+
+<div class="hsym_header">
+    <div class="hsym_navBar">
+	<div class="hsym_mpMenu" onclick="backToFront();">
+            <img src="images/wxButton.png" width=191px height=65px></img>
+	</div>
+        <div class="hsym_mpNav" onclick="backToFront();">
+	    <img src="images/wx-backbutton-white.png" height=35px></img>
+	</div>
+        <div class="hsym_navBar_title">核酸疫苗服务查询</div>
+    </div>
+</div>
+
+<div class="hsym_notice_box">
+    <div class="c_main">
+        <img src="images/tongzhihuang.png" width=44px; height=42px;></img>
+    </div>
+    <div class="hsym_notice_swiper hsym_notice_swp">
+	<div class="swiper-wrapper">
+            <div class="swiper-slide hsym_notice_swp_item">
+		您的健康宝核酸天数计算规则变了，还有哪些变化
+	    </div>
+            <div class="swiper-slide hsym_notice_swp_item">
+		北京健康宝更新！升级优化了这些功能——
+	    </div>
+            <div class="swiper-slide hsym_notice_swp_item">
+		北京“健康宝”细化弹窗提示语
+	    </div>
+            <div class="swiper-slide hsym_notice_swp_item">
+		抵京后72小时内，这件事一定要尽早做！
+	    </div>
+            <div class="swiper-slide hsym_notice_swp_item">
+		Q:手机号不再使用时，如何顺利完成行程核验？
+	    </div>
+            <div class="swiper-slide hsym_notice_swp_item">
+		请尽快升级公共交通票卡
+	    </div>
+	</div>
+    </div>
+</div>
+
+<div class="tabs">
+    <div class="tabs__header" id="tab-header" style="position: relative;">
+        <div id="tabs-scroll">
+            <div class="tabs__header--scroll">
+    		<div class="tabs__item__wrap">
+    		    <div class="tabs__item hs_tab tabs__item--active" onclick="hsym_swiper.slidePrev();">核酸检测</div>
+                    <div class="tabs__slider hs_slider"></div>
+    		</div>
+    		<div class="tabs__item__wrap">
+    		    <div class="tabs__item ym_tab" onclick="hsym_swiper.slideNext();">疫苗接种</div>
+                    <div class="tabs__slider ym_slider" style="display: none;"></div>
+    		</div>
+            </div>
+        </div>
+    </div>
+    <div class="hsym_swiper">
+    <div class="swiper-wrapper">
+    <div class="swiper-slide tabs__content">
+            <div class="coswpern1" style="width: 750px; position:relative;">
+                <div style="opacity: 1;position: relative; transition: all .3s;">
+                    <div class="hsym-back-image"></div>
+                </div>
+                <div class="hsym-con">
+                    <div class="hsym-brimg">
+                        <img class="personalImage" src="images/touxiang.jpg"></img>
+                    </div>
+                    <div class="br-box">
+                        <div class="name">
+                            <div class="biaoti">
+				    <div style="letter-spacing: 2em;">姓</div>
+				    <div>名：</div>
+                            </div>
+                            <div class="xingming hsymName">微信用户</div>
+                        </div>
+                        <div class="name">
+                            <div class="biaoti">身份证号：</div>
+                            <div class="xingming personalId">11**************19</div>
+                        </div>
+                    </div>
+                        <div class="type blink">阴性</div>
+                        <div class="juli"> 核酸检测时间 1 天 <img class="hsym-wenhao" src="images/grzxWh.svg"></img>
+			</div>
+                        <div class="didian">
+                            <div class="dd-bt">
+                                <div class="jiancejigou">核酸检测机构</div>
+                                <div class="mingcheng labName">北京千麦医学检验实验室</div>
+                            </div>
+                            <div class="dd-bt">
+                                <div class="jiancejigou">核酸检测时间</div>
+                                <div class="mingcheng checkDate"></div>
+                            </div>
+                        </div>
+                    <div class="hsym-con-footer">
+                        <div>导出或打印检测报告</div>
+                        <div>历史检测结果查询</div>
+                    </div>
+                    <div class="hsym-footer-text">本电子报告与医院或其他检测机构提供的纸质报告具有同等效力。</div>
+                </div>
+                <div class="qrcode">
+                    <div class="qrcode-left">
+                        <img class="hsym-erweima" src="images/hsjc-erweimaIcon.png"></image>
+                        <div class="yuyue">预约</div>
+                    </div>
+                    <div class="qrcode-right">
+                        <font class="tapText">点击这里</font>打开“核酸检测”服务，您可通过本服务进行日常核酸检测预约、预约码展示及采样信息绑定、预约记录查询、检测结果查询。 <img class="hsym-wenhao" src="images/grzxWh.svg"></img>
+                    </div>
+                </div>
+        <div class="g-footer" style="padding-top: 40px;padding-bottom: 40px;">
+            <div class="g-footer__content__text">
+		留言反馈
+                <img class="hcjc-lyhd-input" src="images/input.svg"></img>
+            </div>
+        </div>
+            </div>
+    </div>
+
+    <!--疫苗-->
+
+    <div class="swiper-slide tabs__content">
+        <div class="coswpern2" style="width: 750px; position: relative;">
+            <div style="opacity: 1;position: relative; transition: all .3s;">
+                <div class="hsym-back-image"></div>
+            </div>
+            <div class="zuiding"></div>
+            <div class="hsym-con1">
+                <div class="hsym-brimg1">
+                    <img class="personalImage" src="images/touxiang.jpg"></img>
+                </div>
+                <div class="br-box">
+                    <div class="name">
+                        <div class="biaoti">
+			        <div style="letter-spacing: 2em;">姓</div>
+			        <div>名：</div>
+                        </div>
+                        <div class="xingming hsymName">微信用户</div>
+                    </div>
+                    <div class="name">
+                        <div class="biaoti">身份证号：</div>
+                        <div class="xingming personalId">11**************19</div>
+                    </div>
+                </div>
+                <div class="type">
+                    <div class="blink" style="color: #1f90fb;">完成加强免疫</div>
+                    <div class="time" id="deltaDays"> 距离第三剂次接种完成已过 30 天</div>
+                </div>
+                <div class="br-box bxo">
+                    <div class="wenxintishi">
+                        温馨提示
+                    </div>
+                </div>
+                <div class="didian" style="border:none">
+                    <div class="jici">
+                        <div class="jicizhanshi">
+                            <div>第一剂次</div>
+                        </div>
+                        <div class="jicixinxi">
+                            <div class="jicihuise">疫苗厂商</div>
+                            <div id="dose1Prod">北京生物</div>
+                        </div>
+                        <div class="jicixinxi">
+                            <div class="jicihuise">疫苗类型</div>
+                            <div id="dose1Type">新冠疫苗（Vero细胞）</div>
+                        </div>
+                        <div class="jicixinxi">
+                            <div class="jicihuise">接种日期</div>
+                            <div id="dose1Date"></div>
+                        </div>
+                    </div>
+                    <div class="jici">
+                        <div class="jicizhanshi">
+                            <div>第二剂次</div>
+                        </div>
+                        <div class="jicixinxi">
+                            <div class="jicihuise">疫苗厂商</div>
+                            <div id="dose2Prod">北京生物</div>
+                        </div>
+                        <div class="jicixinxi">
+                            <div class="jicihuise">疫苗类型</div>
+                            <div id="dose2Type">新冠疫苗（Vero细胞）</div>
+                        </div>
+                        <div class="jicixinxi">
+                            <div class="jicihuise">接种日期</div>
+                            <div id="dose2Date"></div>
+                        </div>
+                    </div>
+                    <div class="jici">
+                        <div class="jicizhanshi">
+                            <div>第三剂次</div>
+                        </div>
+                        <div class="jicixinxi">
+                            <div class="jicihuise">疫苗厂商</div>
+                            <div id="dose3Prod">北京生物</div>
+                        </div>
+                        <div class="jicixinxi">
+                            <div class="jicihuise">疫苗类型</div>
+                            <div id="dose3Type">新冠疫苗（Vero细胞）</div>
+                        </div>
+                        <div class="jicixinxi">
+                            <div class="jicihuise">接种日期</div>
+                            <div id="dose3Date"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="g-footer" style="padding-top: 40px;padding-bottom: 179px;">
+            <div class="g-footer__content__text">
+		留言反馈
+                <img class="hcjc-lyhd-input" src="images/input.svg"></img>
+            </div>
+        </div>
+
+        </div>
+
+    </div>
+    </div><!--swiper-wrapper-->
+
+    </div>
+    <div class="daochupingzhengbox">
+        <button class="btnm">
+    	导出或打印接种凭证
+        </button>
+    </div>
+</div>
+</div>
+
+<script>
+//name:    姓名，显示在主页和扫码/查询页底部
+//id:      身份证号（匿名形式，只显示前2位和后2位，其余用*代替）
+//imgData: 照片用base64编码后的内容
+var name = localStorage.getItem("name");
+var id = localStorage.getItem("id");
+var imgData = localStorage.getItem("imgData");
+hsStatusUpdate();
+ymStatusUpdate();
+
+if (name == undefined || id == undefined || imgData == undefined){
+	//当任何一个信息未知时，显示输入信息界面。
+	document.getElementById("frontPage").style.display = 'none';
+	document.getElementById("infoInput").style.display = 'block';
+	console.log("No name or id, promt to get user info.");
+}else{
+	document.getElementById("personalName").innerHTML = name;
+	var personalAnonymousNames = document.getElementsByClassName("personalNameAnonymous");
+	[].forEach.call(personalAnonymousNames, function (el) {
+		el.innerHTML = name[0]+"*";
+	});
+
+	var hsymNames = document.getElementsByClassName("hsymName");
+	[].forEach.call(hsymNames, function (el) {
+		el.innerHTML = name[0]+"**";
+	});
+
+	var personalIds = document.getElementsByClassName("personalId");
+	[].forEach.call(personalIds, function (el) {
+		el.innerHTML = id;
+	});
+
+	var personalImages = document.getElementsByClassName("personalImage");
+	[].forEach.call(personalImages, function (el) {
+		el.src = "data:image/png;base64," + imgData;
+	});
+
+}
+
+function showInfo()
+{
+	document.getElementById("frontPage").style.display = 'none';
+	document.getElementById("infoPage").style.display = 'block';
+	//back to top
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
+function showhsym()
+{
+	document.getElementById("frontPage").style.display = 'none';
+	document.getElementById("hsymPage").style.display = 'block';
+}
+
+function backToFront()
+{
+	document.getElementById("infoPage").style.display = 'none';
+	document.getElementById("saomaPage").style.display = 'none';
+	document.getElementById("hsymPage").style.display = 'none';
+	document.getElementById("frontPage").style.display = 'block';
+	//back to top
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
+function updateInfo()
+{
+	var name = document.getElementById("nameText").value;
+	localStorage.setItem("name", name);
+	var id = document.getElementById("idText").value;
+	localStorage.setItem("id", id);
+	var avatar= document.getElementById('avatarImg');
+	var imgData = getBase64Image(avatar);
+	localStorage.setItem("imgData", imgData);
+
+	var dose1Date = document.getElementById("dose1Dateinput").value;
+	localStorage.setItem("dose1Date",dose1Date);
+	var dose2Date = document.getElementById("dose2Dateinput").value;
+	localStorage.setItem("dose2Date",dose2Date);
+	var dose3Date = document.getElementById("dose3Dateinput").value;
+	localStorage.setItem("dose3Date",dose3Date);
+
+	var dose1Prod = document.getElementById("dose1Prodinput").value;
+	localStorage.setItem("dose1Prod",dose1Prod);
+	var dose2Prod = document.getElementById("dose2Prodinput").value;
+	localStorage.setItem("dose2Prod",dose2Prod);
+	var dose3Prod = document.getElementById("dose3Prodinput").value;
+	localStorage.setItem("dose3Prod",dose3Prod);
+
+	var dose1Type = document.getElementById("dose1Typeinput").value;
+	localStorage.setItem("dose1Type",dose1Type);
+	var dose2Type = document.getElementById("dose2Typeinput").value;
+	localStorage.setItem("dose2Type",dose2Type);
+	var dose3Type = document.getElementById("dose3Typeinput").value;
+	localStorage.setItem("dose3Type",dose3Type);
+	window.location.reload();
+}
+
+function readURL(input)
+{
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            document.getElementById('avatarImg').src =  e.target.result;
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    var dataURL = canvas.toDataURL("image/png");
+
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}
+
+function vaxShow() {
+    document.getElementById("vaxShowButton").style.display="none";
+    document.getElementById("vaxText").style.display="block";
+    document.getElementById("vaxHideButton").style.display="block";
+}
+
+function vaxHide() {
+    document.getElementById("vaxText").style.display="none";
+    document.getElementById("vaxHideButton").style.display="none";
+    document.getElementById("vaxShowButton").style.display="block";
+}
+
+function playAudio(){
+    var audio = null;
+    audio = document.getElementById("audio0");
+    audio.currentTime = 0;
+    audio.play();
+}
+
+function cameraOn() {
+  document.getElementById("frontPage").style.display = "none";
+  document.getElementById("cameraPage").style.display = "block";
+  var video = document.querySelector("#videoElement");
+
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({audio: false, video: {facingMode: 'environment'} })
+      .then(function (stream) {
+        video.srcObject = stream;
+      })
+      .catch(function (error) {
+        console.log("Something went wrong!");
+      });
+  }
+
+  video.addEventListener("click",stop,false);
+
+  function stop(e) {
+    var stream = video.srcObject;
+    if (stream == null){
+      return;
+    }
+    var tracks = stream.getTracks();
+
+    for (var i = 0; i < tracks.length; i++) {
+      var track = tracks[i];
+      track.stop();
+    }
+
+    video.srcObject = null;
+    document.getElementById("cameraPage").style.display = "none";
+    document.getElementById("saomaPage").style.display = "block";
+    playAudio();
+  }
+}
+
+function switchToImg() {
+  swiper.autoplay.stop();
+  document.getElementsByClassName("texts")[0].style.display = "none";
+  document.getElementsByClassName("titleImg")[0].style.display = "block";
+}
+
+function switchToNotice() {
+  document.getElementsByClassName("titleImg")[0].style.display = "none";
+  document.getElementsByClassName("texts")[0].style.display = "flex";
+  swiper.autoplay.start();
+}
+
+function hsStatusUpdate()
+{
+  var checkDate = localStorage.getItem("checkDate");
+  var nowtime = new Date();
+  if (checkDate != undefined){
+    checktime = new Date(checkDate);
+    var days = Math.floor((nowtime - checktime)/(24*3600*1000));
+    if (days < 1 ){
+      hsStatusFlush();
+      return;
+    }
+  }
+  //record too old or even do not have one
+  //go back 10.24 hours
+  checkDate = new Date(nowtime - 36864000);
+  localStorage.setItem('checkDate',checkDate.toISOString());
+  const labNames = [
+"北京凯普医学检验实验室",
+"北京千麦医学检验实验室",
+"北京迪安医学检验实验室",
+"北京美因医学检验实验室",
+"北京诺尼医学检验实验室",
+"北京优迅医学检验实验室",
+"北京致朴医学检验实验室",
+  ]
+  var labName = labNames[Math.floor(Math.random()*labNames.length)];
+  localStorage.setItem('labName',labName);
+  hsStatusFlush();
+}
+
+function hsStatusFlush()
+{
+  var checkDate = localStorage.getItem("checkDate");
+  var checktime = new Date(checkDate);
+  const NUMBERS = ["00",
+	  	   "01","02","03","04","05","06","07","08","09","10",
+	           "11","12","13","14","15","16","17","18","19","20",
+	           "21","22","23","24","25","26","27","28","29","30",
+	           "31","32","33","34","35","36","37","38","39","40",
+	           "41","42","43","44","45","46","47","48","49","50",
+	           "51","52","53","54","55","56","57","58","59","60",
+  ];
+  var outputString = ''+checktime.getFullYear()+"-"+NUMBERS[checktime.getMonth()+1]+"-"+NUMBERS[checktime.getDate()]+" "+NUMBERS[checktime.getHours()]+":"+NUMBERS[checktime.getMinutes()]+":"+NUMBERS[checktime.getSeconds()];
+  document.getElementsByClassName("checkDate")[0].innerHTML = outputString;
+  var labName = localStorage.getItem('labName',labName);
+  document.getElementsByClassName("labName")[0].innerHTML = labName;
+}
+
+function ymStatusUpdate()
+{
+  var dose1Date = localStorage.getItem("dose1Date");
+  var dose2Date = localStorage.getItem("dose2Date");
+  var dose3Date = localStorage.getItem("dose3Date");
+
+  if (dose1Date == undefined || dose2Date == undefined || dose3Date == undefined){
+  var now = new Date();
+  var dose3time = new Date(now - 89*24*3600*1000);
+  dose3Date = dose3time.toISOString().split('T')[0];
+  var dose2time = new Date(now - (89+192)*24*3600*1000);
+  dose2Date = dose2time.toISOString().split('T')[0];
+  var dose1time = new Date(now - (89+192+35)*24*3600*1000);
+  dose1Date = dose1time.toISOString().split('T')[0];
+
+  localStorage.setItem("dose1Prod","北京生物");
+  localStorage.setItem("dose2Prod","北京生物");
+  localStorage.setItem("dose3Prod","北京生物");
+  localStorage.setItem("dose1Type","新冠疫苗（Vero细胞）");
+  localStorage.setItem("dose2Type","新冠疫苗（Vero细胞）");
+  localStorage.setItem("dose3Type","新冠疫苗（Vero细胞）");
+  localStorage.setItem("dose1Date",dose1Date);
+  localStorage.setItem("dose2Date",dose2Date);
+  localStorage.setItem("dose3Date",dose3Date);
+  }
+  ymStatusFlush();
+}
+
+function ymStatusFlush()
+{
+  var dose1Prod = localStorage.getItem("dose1Prod");
+  document.getElementById("dose1Prod").innerHTML = dose1Prod;
+  var dose2Prod = localStorage.getItem("dose2Prod");
+  document.getElementById("dose2Prod").innerHTML = dose2Prod;
+  var dose3Prod = localStorage.getItem("dose3Prod");
+  document.getElementById("dose3Prod").innerHTML = dose3Prod;
+
+  var dose1Type = localStorage.getItem("dose1Type");
+  document.getElementById("dose1Type").innerHTML = dose1Type;
+  var dose2Type = localStorage.getItem("dose2Type");
+  document.getElementById("dose2Type").innerHTML = dose2Type;
+  var dose3Type = localStorage.getItem("dose3Type");
+  document.getElementById("dose3Type").innerHTML = dose3Type;
+
+  var dose1Date = localStorage.getItem("dose1Date");
+  document.getElementById("dose1Date").innerHTML = dose1Date;
+  var dose2Date = localStorage.getItem("dose2Date");
+  document.getElementById("dose2Date").innerHTML = dose2Date;
+  var dose3Date = localStorage.getItem("dose3Date");
+  document.getElementById("dose3Date").innerHTML = dose3Date;
+
+  var dose3time = new Date(dose3Date);
+  var nowtime = new Date();
+  var days = Math.floor((nowtime - dose3time)/(24*3600*1000));
+  deltaDays = "距离第三剂次接种完成已过 "+days+" 天";
+  document.getElementById("deltaDays").innerHTML = deltaDays;
+}
+</script>
+
+<script>
+var dcpzBox = document.querySelector('.daochupingzhengbox');
+var hsTab = document.querySelector('.hs_tab');
+var hsSlider = document.querySelector('.hs_slider');
+var ymTab = document.querySelector('.ym_tab');
+var ymSlider = document.querySelector('.ym_slider');
+
+const hsym_swiper = new Swiper('.hsym_swiper', {
+  // Optional parameters
+  direction: 'horizontal',
+  autoHeight: true,
+  on: {
+        slideChangeTransitionStart: function () {
+          var slider = this;
+          if (slider.activeIndex === 0) {
+            dcpzBox.style.display = 'none';
+	    hsTab.classList.add('tabs__item--active');
+	    ymTab.classList.remove('tabs__item--active');
+	    hsSlider.style.display = 'block';
+	    ymSlider.style.display = 'none';
+          } else {
+            dcpzBox.style.display = 'flex';
+	    ymTab.classList.add('tabs__item--active');
+	    hsTab.classList.remove('tabs__item--active');
+	    hsSlider.style.display = 'none';
+	    ymSlider.style.display = 'block';
+          }
+        },
+
+        //slideChangeTransitionEnd: function () {
+        //  var slider = this;
+        //  if (slider.activeIndex === 1) {
+        //    dcpzBox.style.display = 'flex';
+        //  }
+        //},
+  },
+});
+const hsym_notice_swiper = new Swiper('.hsym_notice_swiper', {
+  // Optional parameters
+  direction: 'vertical',
+  loop: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: false,
+  },
+});
+</script>
+</body>
+</html>
